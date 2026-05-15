@@ -1,0 +1,15 @@
+\begin{tikzpicture}[font=\scriptsize, node distance=1.0cm]
+\tikzstyle{process}=[rectangle, rounded corners, draw=black, thick, minimum width=2.0cm, minimum height=0.75cm, align=center]
+\node[process, fill=gray!10] (obs) {Observe\\SLO/SLI, telemetry};
+\node[process, fill=gray!6, right=of obs] (cost) {Optimize\\Cost and capacity};
+\node[process, fill=gray!10, below=of cost] (gov) {Govern\\Policy and controls};
+\node[process, fill=gray!6, left=of gov] (dr) {Validate\\DR and resilience};
+\node[process, fill=gray!10, below=0.65cm of $(obs)!0.5!(gov)$] (learn) {Improve\\Standards, runbooks, automation};
+\draw[-{Latex[length=2mm]}, thick] (obs) -- (cost);
+\draw[-{Latex[length=2mm]}, thick] (cost) -- (gov);
+\draw[-{Latex[length=2mm]}, thick] (gov) -- (dr);
+\draw[-{Latex[length=2mm]}, thick] (dr) -- (obs);
+\draw[-{Latex[length=2mm]}, dashed, thick] (dr) -- (learn);
+\draw[-{Latex[length=2mm]}, dashed, thick] (learn) -- (obs);
+\node[draw=black, rounded corners, fit=(obs)(cost)(gov)(dr)(learn), inner sep=0.18cm, label=above:{Continuous MCGR Feedback Loop}] {};
+\end{tikzpicture}

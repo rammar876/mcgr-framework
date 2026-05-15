@@ -1,0 +1,13 @@
+\begin{tikzpicture}[node distance=0.15cm, font=\scriptsize]
+\tikzstyle{layer}=[rectangle, rounded corners, draw=black, thick, minimum width=7.0cm, minimum height=0.75cm, align=center]
+\node[layer, fill=gray!10] (gov) {Governance and Policy Layer\\IAM/RBAC, Zero Trust, Compliance, Policy-as-Code};
+\node[layer, fill=gray!6, below=of gov] (obs) {Observability and SRE Layer\\SLO/SLI, Monitoring, Incident Response, Automation};
+\node[layer, fill=gray!10, below=of obs] (cost) {Cost Optimization Engine\\Rightsizing, Reserved Capacity, Forecasting, Dashboards};
+\node[layer, fill=gray!6, below=of cost] (dr) {Disaster Recovery and Resilience Layer\\Replication, Failover, RTO/RPO, Recovery Testing};
+\node[layer, fill=gray!10, below=of dr] (infra) {Multi-Cloud Infrastructure Layer\\AWS, Azure, GCP, Compute, Storage, Network, Data Services};
+\draw[-{Latex[length=2mm]}, thick] (gov) -- (obs);
+\draw[-{Latex[length=2mm]}, thick] (obs) -- (cost);
+\draw[-{Latex[length=2mm]}, thick] (cost) -- (dr);
+\draw[-{Latex[length=2mm]}, thick] (dr) -- (infra);
+\draw[-{Latex[length=2mm]}, dashed, thick] (infra.east) .. controls +(1.0,-0.3) and +(1.0,0.3) .. node[right, align=left]{feedback\\signals} (gov.east);
+\end{tikzpicture}
